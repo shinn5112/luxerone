@@ -3,6 +3,7 @@
 ![https://readthedocs.org/projects/luxerone/badge/?version=latest](https://readthedocs.org/projects/luxerone/badge/?version=latest)
 ![Publish Workflow](https://github.com/shinn5112/luxerone/actions/workflows/python-publish.yaml/badge.svg)
 
+
 An unofficial Python client for the [Luxer One Residential](https://www.luxerone.com/market/residential/) API. 
 
 ## Example
