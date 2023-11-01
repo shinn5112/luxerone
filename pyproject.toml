@@ -20,4 +20,4 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/shinn5112/luxerone"
 "Bug Tracker" = "https://github.com/shinn5112/luxerone/issues"
-"Documentation" = "TODO"
+"Documentation" = "https://luxerone.readthedocs.io/en/latest/"
