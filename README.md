@@ -1,7 +1,10 @@
 # Unofficial Luxer One Python Client
 
-![https://readthedocs.org/projects/luxerone/badge/?version=latest](https://readthedocs.org/projects/luxerone/badge/?version=latest)
+[![MIT License](https://img.shields.io/badge/any_text-liscense-blue)](https://github.com/shinn5112/luxerone/blob/master/LICENSE)
+![GitHub release (with filter)](https://img.shields.io/github/v/release/shinn5112/luxerone)
+[![PyPI version](https://badge.fury.io/py/luxerone.svg)](https://badge.fury.io/py/luxerone)
 ![Publish Workflow](https://github.com/shinn5112/luxerone/actions/workflows/python-publish.yaml/badge.svg)
+![https://readthedocs.org/projects/luxerone/badge/?version=latest](https://readthedocs.org/projects/luxerone/badge/?version=latest)
 
 
 An unofficial Python client for the [Luxer One Residential](https://www.luxerone.com/market/residential/) API. 
@@ -9,7 +12,7 @@ An unofficial Python client for the [Luxer One Residential](https://www.luxerone
 ## Example
 
 ```python
-from luxerone import LuxerOneClient
+from luxerone.client import LuxerOneClient
 
 # credentials
 username = "youremail@example.com"
