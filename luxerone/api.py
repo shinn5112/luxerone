@@ -1,13 +1,13 @@
 """
 Utilities for interacting with the Luxer One REST API.
 """
+import asyncio
 import enum
-import json
-import urllib.parse
-import urllib.request
+from requests import PreparedRequest, Response, Request, Session
 
 from luxerone.exceptions import LuxerOneAPIException
 from luxerone.forms import _RequestForm
+
 _API_BASE = "https://resident-api.luxerone.com/resident_api/v1"
 _DEFAULT_HEADERS = {
     "content-type": "application/x-www-form-urlencoded",
@@ -51,17 +51,16 @@ class API(enum.Enum):
 
 
 class LuxerOneApiResponse:
-    def __init__(self, api_response):
+    def __init__(self, api_response: dict):
         """
         Class representing an API response.
         :param api_response: raw api response from url_open.
         """
-        decoded_response = json.loads(api_response.decode('utf-8'))
         self.data = None
         self.error = None
         for element in self.__dict__.keys():
             try:
-                self.__dict__[element] = decoded_response[element]
+                self.__dict__[element] = api_response[element]
             except KeyError:
                 self.__dict__[element] = None
 
@@ -89,26 +88,58 @@ class LuxerOneApiResponse:
         return object_string
 
 
-def api_request(api: API, token: str = None, form: _RequestForm = None) -> dict[any, any]:
+def _build_request(api: API, form: _RequestForm = None, token: str = None) -> PreparedRequest:
     """
-    Helper function for calling api endpoints
-    :param api:
-    :param token:  the API token to add to the authorization header
-    :param form:   the message body for POST request that will be URL encoded
-    :return: the returned json parsed as a dict
+    Builds the request to be sent.
+    :param api: Api to use.
+    :param form: Any form data.
+    :param token: Auth token.
+    :return:
     """
     url = _API_BASE + api.get_endpoint()
     data = None
     if form:
-        data = urllib.parse.urlencode(form.get_data()).encode()
-    req = urllib.request.Request(url, method=api.get_method(), data=data, headers=_DEFAULT_HEADERS)
+        data = form.get_data()
+    req = Request(api.get_method(), url, data=data, headers=_DEFAULT_HEADERS)
+    prepared_request = req.prepare()
     if token:
-        req.add_header("authorization", "LuxerOneApi " + token)
+        prepared_request.headers["authorization"] = "LuxerOneApi " + token
+    return prepared_request
 
-    # parsing response
-    raw_response = urllib.request.urlopen(req)
-    response = LuxerOneApiResponse(raw_response.read())
-    raw_response.close()
-    if response.has_error():
-        raise LuxerOneAPIException(f'Received an error response from the API: {response.error}')
-    return response.data
+
+def api_request(api: API, token: str = None, form: _RequestForm = None) -> dict[any, any]:
+    """
+    Helper function for calling api endpoints.
+
+    :param api:    API to call.
+    :param token:  the API token to add to the authorization header.
+    :param form:   the message body for POST request that will be URL encoded.
+    :return: the returned json parsed as a dict.
+    """
+    request = _build_request(api, form, token)
+    session = Session()
+    response = session.send(request)
+    api_response = LuxerOneApiResponse(response.json())
+    session.close()
+    if api_response.has_error():
+        raise LuxerOneAPIException(f'Received an error response from the API: {api_response.error}')
+    return api_response.data
+
+
+async def async_api_request(api: API, token: str = None, form: _RequestForm = None) -> dict[any, any]:
+    """
+    Asynchronous helper function for calling api endpoints.
+
+    :param api:    API to call.
+    :param token:  the API token to add to the authorization header.
+    :param form:   the message body for POST request that will be URL encoded.
+    :return: the returned json parsed as a dict.
+    """
+    request = _build_request(api, form, token)
+    session = Session()
+    response: Response = await asyncio.to_thread(session.send, request)
+    api_response = LuxerOneApiResponse(response.json())
+    session.close()
+    if api_response.has_error():
+        raise LuxerOneAPIException(f'Received an error response from the API: {api_response.error}')
+    return api_response.data
