@@ -1,0 +1,4 @@
+pylint
+pytest==8.2.0
+pre-commit
+requests~=2.31.0

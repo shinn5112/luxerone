@@ -1,12 +1,12 @@
+"""Tests for LuxerOneClient methods."""
 import unittest
-
-from luxerone.client import LuxerOneClient
 
 
 class TestLuxerOneClient(unittest.TestCase):
+    """LuxerOneClient test class."""
 
     def test_login(self):
-        pass
+        """Test basic login."""
 
 
 if __name__ == '__main__':

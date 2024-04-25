@@ -1,33 +1,30 @@
-"""
-Wrapper classes for all information relating to the user.
-"""
+"""Wrapper classes for all information relating to the user."""
+
+import json
+
+from luxerone._utils import _populate_self
+
+# simple data wrapper class, disable public methods check.
+# pylint: disable=too-few-public-methods
+# pylint: disable=invalid-name
+# pylint: disable=too-many-instance-attributes
 
 
 class UserInfoLocation:
-    """
-    Delivery location information associated with a user.
-    """
+    """Delivery location information associated with a user."""
 
     class Location:
-        """
-        Location information.
-        """
+        """Location information."""
 
         def __init__(self, location_info: dict):
-            """
-            :param location_info:
-            """
+            """:param location_info:"""
             self.id = None
             self.name = None
             self.lockerLocation = None
             self.timezone = None
             self.holdPackages = None
             self.holdPackagesLimit = None
-            for element in self.__dict__.keys():
-                try:
-                    self.__dict__[element] = location_info[element]
-                except KeyError:
-                    self.__dict__[element] = None
+            _populate_self(self, location_info)
 
         def __str__(self):
             """
@@ -35,26 +32,13 @@ class UserInfoLocation:
 
             :return: object string representation.
             """
-            object_string = "["
-            counter = 0
-            dict_size = len(self.__dict__.items())
-            for key, value in self.__dict__.items():
-                object_string += f'{key}: {value}'
-                if counter != (dict_size - 1):
-                    object_string += ", "
-                counter += 1
-            object_string += "]"
-            return object_string
+            return json.dumps(self)
 
     class LocationUser:
-        """
-        Class representing the Location of a user for the UserInfo object.
-        """
+        """Class representing the Location of a user for the UserInfo object."""
 
         def __init__(self, location_user_info: dict):
-            """
-            :param location_user_info:
-            """
+            """:param location_user_info:"""
             self.id = None
             self.user_id = None
             self.location_id = None
@@ -73,11 +57,7 @@ class UserInfoLocation:
             self.boxAccessCode = None
             self.customers_imports_id = None
             self.importer_correlation_id = None
-            for element in self.__dict__.keys():
-                try:
-                    self.__dict__[element] = location_user_info[element]
-                except KeyError:
-                    self.__dict__[element] = None
+            _populate_self(self, location_user_info)
 
         def __str__(self):
             """
@@ -85,23 +65,14 @@ class UserInfoLocation:
 
             :return: object string representation.
             """
-            object_string = "["
-            counter = 0
-            dict_size = len(self.__dict__.items())
-            for key, value in self.__dict__.items():
-                object_string += f'{key}: {value}'
-                if counter != (dict_size - 1):
-                    object_string += ", "
-                counter += 1
-            object_string += "]"
-            return object_string
+            return json.dumps(self)
 
     def __init__(self, all_locations_data: dict):
-        """
-        :param all_locations_data:
-        """
+        """:param all_locations_data:"""
         self.location = UserInfoLocation.Location(all_locations_data["Location"])
-        self.location_user = UserInfoLocation.LocationUser(all_locations_data["LocationsUser"])
+        self.location_user = UserInfoLocation.LocationUser(
+            all_locations_data["LocationsUser"]
+        )
 
     def __str__(self):
         """
@@ -109,27 +80,14 @@ class UserInfoLocation:
 
         :return: object string representation.
         """
-        object_string = "["
-        counter = 0
-        dict_size = len(self.__dict__.items())
-        for key, value in self.__dict__.items():
-            object_string += f'{key}: {value}'
-            if counter != (dict_size - 1):
-                object_string += ", "
-            counter += 1
-        object_string += "]"
-        return object_string
+        return json.dumps(self)
 
 
 class UserInfo:
-    """
-    Class representing the user information.
-    """
+    """Class representing the user information."""
 
     def __init__(self, user_info: dict):
-        """
-        :param user_info:
-        """
+        """:param user_info:"""
         self.id = None
         self.firstName = None
         self.lastName = None
@@ -155,13 +113,8 @@ class UserInfo:
         self.lockerLocation = None
         self.showLockerLocation = None
         self.showRatingPrompt = None
-        for element in self.__dict__.keys():
-            try:
-                self.__dict__[element] = user_info[element]
-            except KeyError:
-                self.__dict__[element] = None
-
-        self.all_locations = list()
+        _populate_self(self, user_info)
+        self.all_locations = []
         try:
             locations = user_info["allLocations"]
             for location in locations:
@@ -175,13 +128,4 @@ class UserInfo:
 
         :return: object string representation.
         """
-        object_string = "["
-        counter = 0
-        dict_size = len(self.__dict__.items())
-        for key, value in self.__dict__.items():
-            object_string += f'{key}: {value}'
-            if counter != (dict_size - 1):
-                object_string += ", "
-            counter += 1
-        object_string += "]"
-        return object_string
+        return json.dumps(self)

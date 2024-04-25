@@ -1,13 +1,16 @@
 # Unofficial Luxer One Python Client
 
-[![MIT License](https://img.shields.io/badge/any_text-liscense-blue)](https://github.com/shinn5112/luxerone/blob/master/LICENSE)
+[![MIT License](https://img.shields.io/badge/liscense-MIT-blue)](https://github.com/shinn5112/luxerone/blob/master/LICENSE)
 ![GitHub release (with filter)](https://img.shields.io/github/v/release/shinn5112/luxerone)
 [![PyPI version](https://badge.fury.io/py/luxerone.svg)](https://badge.fury.io/py/luxerone)
-![Publish Workflow](https://github.com/shinn5112/luxerone/actions/workflows/python-publish.yaml/badge.svg)
 ![https://readthedocs.org/projects/luxerone/badge/?version=latest](https://readthedocs.org/projects/luxerone/badge/?version=latest)
+[![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
+[![Imports: isort](https://img.shields.io/badge/imports-isort-blue)](https://pycqa.github.io/isort/)
+
+![Publish Workflow](https://github.com/shinn5112/luxerone/actions/workflows/python-publish.yaml/badge.svg)
 
 
-An unofficial Python client for the [Luxer One Residential](https://www.luxerone.com/market/residential/) API. 
+An unofficial Python client for the [Luxer One Residential](https://www.luxerone.com/market/residential/) API.
 
 ## Example
 
@@ -32,4 +35,4 @@ luxer_one_client.logout()
 
 ```
 
-For more details, please see the docs.
+For more details, please see the [docs](https://luxerone.readthedocs.io/en/latest/).

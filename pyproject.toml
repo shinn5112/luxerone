@@ -10,14 +10,42 @@ authors = [
 ]
 description = "Unofficial LuxerOne residential API client for Python."
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+]
+dependencies = [
+  "requests~=2.31.0"
 ]
 
 [project.urls]
 "Homepage" = "https://github.com/shinn5112/luxerone"
 "Bug Tracker" = "https://github.com/shinn5112/luxerone/issues"
 "Documentation" = "https://luxerone.readthedocs.io/en/latest/"
+
+[tool.pylint.MASTER]
+ignore-paths = "tests,venv,docs"
+
+[tool.pylint.LOGGING]
+logging-format-style="new"
+
+[tool.autoflake]
+#check = true  # if enabled, autoflake will not automatically remove issues.
+in-place = true
+remove-unused-variables = true
+remove-all-unused-imports = true
+
+[tool.isort]
+profile = "black"
+
+[tool.pydocstringformatter]
+write = true
+exclude = ["/docs"]
+strip-whitespaces = true
+split-summary-body = false
+numpydoc-section-hyphen-length = false
+
+[tool.mypy]
+disable_error_code = "import-untyped"

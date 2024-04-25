@@ -1,26 +1,27 @@
-"""
-Wrapper classes for all information relating to package deliveries.
-"""
+"""Wrapper classes for all information relating to package deliveries."""
+
+import json
+
+from luxerone._utils import _populate_self
+
+# This module represents API objects, so disable checks for too few public methods,
+# too many instance attributes, and invalid names.
+
+# pylint: disable=too-few-public-methods
+# pylint: disable=too-many-instance-attributes
+# pylint: disable=invalid-name
 
 
 class Locker:
-    """
-    Locker information.
-    """
+    """Locker information."""
 
     def __init__(self, package_data: dict):
-        """
-        :param package_data: package data in json format from the API.
-        """
+        """:param package_data: package data in json format from the API."""
         self.lockerId = None
         self.lockerNumber = None
         self.lockerTypeId = None
         self.lockerType = None
-        for element in self.__dict__.keys():
-            try:
-                self.__dict__[element] = package_data[element]
-            except KeyError:
-                self.__dict__[element] = None
+        _populate_self(self, package_data)
 
     def __str__(self) -> str:
         """
@@ -28,35 +29,18 @@ class Locker:
 
         :return: object string representation.
         """
-        object_string = "["
-        counter = 0
-        dict_size = len(self.__dict__.items())
-        for key, value in self.__dict__.items():
-            object_string += f'{key}: {value}'
-            if counter != (dict_size - 1):
-                object_string += ", "
-            counter += 1
-        object_string += "]"
-        return object_string
+        return json.dumps(self)
 
 
 class Carrier:
-    """
-    Carrier information.
-    """
+    """Carrier information."""
 
     def __init__(self, package_data: dict):
-        """
-        :param package_data: package data in json format from the API.
-        """
+        """:param package_data: package data in json format from the API."""
         self.carrier = None
         self.carrierLogo = None
         self.trackingNumber = None
-        for element in self.__dict__.keys():
-            try:
-                self.__dict__[element] = package_data[element]
-            except KeyError:
-                self.__dict__[element] = None
+        _populate_self(self, package_data)
 
     def __str__(self):
         """
@@ -64,37 +48,20 @@ class Carrier:
 
         :return: object string representation.
         """
-        object_string = "["
-        counter = 0
-        dict_size = len(self.__dict__.items())
-        for key, value in self.__dict__.items():
-            object_string += f'{key}: {value}'
-            if counter != (dict_size - 1):
-                object_string += ", "
-            counter += 1
-        object_string += "]"
-        return object_string
+        return json.dumps(self)
 
 
 class Location:
-    """
-    Location information regarding the package delivery location.
-    """
+    """Location information regarding the package delivery location."""
 
     def __init__(self, package_data: dict):
-        """
-        :param package_data: package data in json format from the API.
-        """
+        """:param package_data: package data in json format from the API."""
         self.location = None
         self.locationId = None
         self.locationAddress = None
         self.lockerLocation = None
         self.timezoneOffset = None
-        for element in self.__dict__.keys():
-            try:
-                self.__dict__[element] = package_data[element]
-            except KeyError:
-                self.__dict__[element] = None
+        _populate_self(self, package_data)
 
     def __str__(self):
         """
@@ -102,27 +69,14 @@ class Location:
 
         :return: object string representation.
         """
-        object_string = "["
-        counter = 0
-        dict_size = len(self.__dict__.items())
-        for key, value in self.__dict__.items():
-            object_string += f'{key}: {value}'
-            if counter != (dict_size - 1):
-                object_string += ", "
-            counter += 1
-        object_string += "]"
-        return object_string
+        return json.dumps(self)
 
 
 class Package:
-    """
-    Package information.
-    """
+    """Package information."""
 
     def __init__(self, package_data: dict):
-        """
-        :param package_data: package data in json format from the API.
-        """
+        """:param package_data: package data in json format from the API."""
         self.id = None
         self.deliveryTypeId = None
         self.delivered = None
@@ -134,11 +88,7 @@ class Package:
         self.charge = None
         self.pickupToken = None
         self.labels = None
-        for element in self.__dict__.keys():
-            try:
-                self.__dict__[element] = package_data[element]
-            except KeyError:
-                self.__dict__[element] = None
+        _populate_self(self, package_data)
         self.carrier = Carrier(package_data)
         self.locker = Locker(package_data)
         self.location = Location(package_data)
@@ -149,27 +99,14 @@ class Package:
 
         :return: object string representation.
         """
-        object_string = "["
-        counter = 0
-        dict_size = len(self.__dict__.items())
-        for key, value in self.__dict__.items():
-            object_string += f'{key}: {value}'
-            if counter != (dict_size - 1):
-                object_string += ", "
-            counter += 1
-        object_string += "]"
-        return object_string
+        return json.dumps(self)
 
 
 class HistoricalPackage(Package):
-    """
-    Historical Package information.
-    """
+    """Historical Package information."""
 
     def __init__(self, package_data: dict):
-        """
-        :param package_data: package data in json format from the API.
-        """
+        """:param package_data: package data in json format from the API."""
         super().__init__(package_data)
         try:
             self.resident = package_data["resident"]
@@ -186,13 +123,4 @@ class HistoricalPackage(Package):
 
         :return: object string representation.
         """
-        object_string = "["
-        counter = 0
-        dict_size = len(self.__dict__.items())
-        for key, value in self.__dict__.items():
-            object_string += f'{key}: {value}'
-            if counter != (dict_size - 1):
-                object_string += ", "
-            counter += 1
-        object_string += "]"
-        return object_string
+        return json.dumps(self)
