@@ -23,7 +23,7 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint --recursive=y ./
-  unittest:
+  test-with-coverage:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -41,4 +41,26 @@ jobs:
           pip install pytest
       - name: Run Pytest and Generate Coverage
         run: |
-          coverage run -m pytest && coverage report
+          coverage run -m pytest && coverage report && coverage xml
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@master
+        with:
+          name: coverage.xml
+          path: coverage.xml
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Download Coverage Report
+        uses: actions/download-artifact@master
+        with:
+          name: coverage.xml
+          path: coverage.xml
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
