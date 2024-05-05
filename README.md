@@ -8,6 +8,14 @@
 [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 [![Imports: isort](https://img.shields.io/badge/imports-isort-blue)](https://pycqa.github.io/isort/)
 
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=shinn5112_luxerone)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=shinn5112_luxerone&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=shinn5112_luxerone)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=shinn5112_luxerone&metric=bugs)](https://sonarcloud.io/summary/new_code?id=shinn5112_luxerone)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=shinn5112_luxerone&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=shinn5112_luxerone)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=shinn5112_luxerone&metric=coverage)](https://sonarcloud.io/summary/new_code?id=shinn5112_luxerone)
+
+
 ![Publish Workflow](https://github.com/shinn5112/luxerone/actions/workflows/verification.yaml/badge.svg)
 ![Publish Workflow](https://github.com/shinn5112/luxerone/actions/workflows/python-publish.yaml/badge.svg)
 
