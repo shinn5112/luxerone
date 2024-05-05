@@ -1,12 +1,14 @@
 # Unofficial Luxer One Python Client
 
-[![MIT License](https://img.shields.io/badge/liscense-MIT-blue)](https://github.com/shinn5112/luxerone/blob/master/LICENSE)
-![GitHub release (with filter)](https://img.shields.io/github/v/release/shinn5112/luxerone)
+![GitHub release](https://img.shields.io/github/v/release/shinn5112/luxerone?sort=semver&color=blue)
 [![PyPI version](https://badge.fury.io/py/luxerone.svg)](https://badge.fury.io/py/luxerone)
+[![MIT License](https://img.shields.io/badge/liscense-MIT-blue)](https://github.com/shinn5112/luxerone/blob/master/LICENSE)
+
 ![https://readthedocs.org/projects/luxerone/badge/?version=latest](https://readthedocs.org/projects/luxerone/badge/?version=latest)
 [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 [![Imports: isort](https://img.shields.io/badge/imports-isort-blue)](https://pycqa.github.io/isort/)
 
+![Publish Workflow](https://github.com/shinn5112/luxerone/actions/workflows/verification.yaml/badge.svg)
 ![Publish Workflow](https://github.com/shinn5112/luxerone/actions/workflows/python-publish.yaml/badge.svg)
 
 

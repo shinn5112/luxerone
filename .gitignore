@@ -3,3 +3,4 @@ venv
 docs/build
 dist
 luxerone.egg-info
+.coverage

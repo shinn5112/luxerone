@@ -39,6 +39,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest
-      - name: Run Pytest
+      - name: Run Pytest and Generate Coverage
         run: |
-          pytest
+          coverage run -m pytest && coverage report

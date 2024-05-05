@@ -1,4 +1,5 @@
 pylint
 pytest==8.2.0
+coverage
 pre-commit
 requests~=2.31.0
