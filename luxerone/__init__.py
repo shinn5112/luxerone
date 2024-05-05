@@ -1,3 +1,1 @@
-"""
-Unofficial LuxerOne API Python client.
-"""
+"""Unofficial LuxerOne API Python client."""
