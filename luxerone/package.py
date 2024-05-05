@@ -32,7 +32,7 @@ class Locker:
         return json.dumps(self)
 
 
-class Carrier:
+class PackageCarrier:
     """Carrier information."""
 
     def __init__(self, package_data: dict):
@@ -51,7 +51,7 @@ class Carrier:
         return json.dumps(self)
 
 
-class Location:
+class DeliveryLocation:
     """Location information regarding the package delivery location."""
 
     def __init__(self, package_data: dict):
@@ -89,9 +89,9 @@ class Package:
         self.pickupToken = None
         self.labels = None
         _populate_self(self, package_data)
-        self.carrier = Carrier(package_data)
+        self.carrier = PackageCarrier(package_data)
         self.locker = Locker(package_data)
-        self.location = Location(package_data)
+        self.location = DeliveryLocation(package_data)
 
     def __str__(self):
         """
