@@ -32,7 +32,6 @@ ignore-paths = "tests,venv,docs"
 logging-format-style="new"
 
 [tool.autoflake]
-#check = true  # if enabled, autoflake will not automatically remove issues.
 in-place = true
 remove-unused-variables = true
 remove-all-unused-imports = true

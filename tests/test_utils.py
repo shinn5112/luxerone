@@ -5,7 +5,7 @@ import unittest
 from luxerone._utils import _populate_self
 
 
-class TestObject:
+class MockUser:
     """Test object/data wrapper."""
 
     def __init__(self):
@@ -20,7 +20,7 @@ class TestUtilities(unittest.TestCase):
         """Test to ensure object fields are populated correctly from data."""
 
         data = {"name": "test", "data": "value"}
-        target = TestObject()
+        target = MockUser()
         _populate_self(target, data)
         self.assertEqual(target.name, "test")  # add assertion here
         self.assertEqual(target.data, "value")
@@ -29,7 +29,7 @@ class TestUtilities(unittest.TestCase):
         """Test to ensure that unknown fields are populated with None."""
 
         data = {"name": "test"}
-        target = TestObject()
+        target = MockUser()
         _populate_self(target, data)
         self.assertEqual(target.name, "test")  # add assertion here
         self.assertEqual(target.data, None)
