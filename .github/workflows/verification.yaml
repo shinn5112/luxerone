@@ -15,6 +15,7 @@ jobs:
       uses: actions/setup-python@v5.1.0
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -33,6 +34,7 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5.1.0
         with:
+          cache: 'pip'
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
@@ -58,7 +60,6 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: coverage.xml
-          path: coverage.xml
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
