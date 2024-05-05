@@ -32,7 +32,7 @@ class TestUtilities(unittest.TestCase):
         target = MockUser()
         _populate_self(target, data)
         self.assertEqual(target.name, "test")  # add assertion here
-        self.assertEqual(target.data, None)
+        self.assertIsNone(target.data)
 
 
 if __name__ == "__main__":

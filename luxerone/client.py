@@ -176,9 +176,7 @@ class LuxerOneClient:
         :return: logout response or None if the token is already expired.
         """
         if self._auth_token_details is None:
-            raise RequestNotAuthenticatedException(
-                "You have not received an API Auth token yet, login to get one."
-            )
+            raise RequestNotAuthenticatedException()
         if not self._auth_token_details.is_expired():
             form = _LogoutForm(self._auth_token_details.token)
             response = dict(
@@ -203,9 +201,7 @@ class LuxerOneClient:
         :return: logout response or None if the token is already expired.
         """
         if self._auth_token_details is None:
-            raise RequestNotAuthenticatedException(
-                "You have not received an API Auth token yet, login to get one."
-            )
+            raise RequestNotAuthenticatedException()
         if not self._auth_token_details.is_expired():
             form = _LogoutForm(self._auth_token_details.token)
             response = dict(
@@ -416,9 +412,7 @@ class LuxerOneClient:
         :raise TokenExpiredException: if called with an expired token.
         """
         if self._auth_token_details is None:
-            raise RequestNotAuthenticatedException(
-                "You have not received an API Auth token yet, login to get one."
-            )
+            raise RequestNotAuthenticatedException()
         if self._auth_token_details.is_expired():
             raise TokenExpiredException(
                 "Your API Auth token expired, "
